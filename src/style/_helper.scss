@@ -1,0 +1,54 @@
+$bottomPos: 5%;
+$anim: .8s ease-in-out alternate infinite;
+$scrollPointerPos: calc(10% +  $sound-btn-width);
+$scrollPointerPosChange: calc(9% +  $sound-btn-width);
+
+.helper {
+  position: fixed;
+  color: #fff;
+  bottom: $bottomPos;
+  font-size: 1em;
+  pointer-events: none;
+
+  &.disabled {
+    display: none;
+  }
+
+  &--scroll {
+    left: 50%;
+    transform: translateX(-50%);
+    animation: up-bounce $anim;
+  }
+
+  &--audio {
+    right: $scrollPointerPos;
+    animation: right-bounce $anim;
+
+    svg {
+      transform: rotate(90deg);
+    }
+  }
+
+  svg {
+    fill: #ffffff;
+    @include box(12px);
+  }
+}
+
+@keyframes up-bounce {
+  0%{
+    bottom: $bottomPos;
+  }
+  100%{
+    bottom: 7%;
+  }
+}
+
+@keyframes right-bounce {
+  0%{
+    right: $scrollPointerPos;
+  }
+  100%{
+    right: $scrollPointerPosChange;
+  }
+}

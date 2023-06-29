@@ -1,0 +1,125 @@
+@import "reset";
+@import "global";
+@import "mixins";
+@import "fonts";
+@import "loader";
+@import "soundBtn";
+@import "helper";
+
+$base: "../assets/images/";
+$images:
+  "1.jpeg", //1
+  "2.jpeg", //2
+  "3.jpeg", //3
+  "4.jpeg", //4
+  "5.jpeg"; //5
+
+body {
+  background-color: #000;
+  color: #fff;
+  font-size: calc($index * .8);
+  font-family: Raleway300, sans-serif;
+  line-height: 1.75;
+  height: $depth;
+
+  @media screen and (max-width: 800px) {
+    height: $depth-m;
+  }
+}
+
+.container {
+ @include box(100%);
+  position: fixed;
+  perspective: 1000px;
+}
+
+.gallery {
+  transform-style: preserve-3d;
+  height: 100%;
+}
+
+.frame {
+  transform-style: preserve-3d;
+  @include box(100%);
+  position: absolute;
+  @include flex;
+  will-change: transform;
+  font-weight: 300;
+  transition: opacity 1s ease-in-out;
+
+  h2 {
+    text-align: center;
+    font-size: calc($index * 3.3);
+    width: min-content;
+  }
+
+  .frame-media {
+    position: relative;
+    width: $side-sm;
+    height: $side-m;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    @each $img in $images {
+      $i: index($images, $img);
+      $url: $base + $img;
+
+      &.media-#{$i} {
+        background-image: url($url);
+      }
+    }
+
+    &.media-x {
+      width: $side-m;
+      height: $side-sm;
+    }
+  }
+
+  .media-left {
+    right: $shift-sm;
+
+    &.media-x{
+      right: $shift-big;
+    }
+  }
+
+  .media-right {
+    left: $shift-sm;
+
+    &.media-x{
+      left: $shift-big;
+    }
+  }
+
+  .media-text {
+    @include flex($dir: column, $align: flex-start);
+
+    h3 {
+      font-size: 3em;
+    }
+  }
+
+  .media-last {
+    align-items: center;
+
+    button {
+      outline: navajowhite;
+      background-color: transparent;
+      border: none;
+      color: inherit;
+      text-decoration: underline;
+      cursor: pointer;
+    }
+  }
+  &-bg {
+    //for disappearing effect
+    background-color: rgba(0,0,0,.78);
+  }
+
+}
+
+h1, h2, h3, h4 {
+  font-weight: 100;
+  text-transform: uppercase;
+}

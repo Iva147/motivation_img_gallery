@@ -1,0 +1,19 @@
+@mixin box($x, $y: 0){
+  width: $x;
+
+  @if $y == 0 {
+    height: $x;
+  } @else {
+    height: $y;
+  }
+}
+
+@mixin flex($align: center, $justify: center, $dir: false) {
+  display: flex;
+  justify-content: $justify;
+  align-items: $align;
+
+  @if $dir {
+    flex-direction: $dir;
+  }
+}
